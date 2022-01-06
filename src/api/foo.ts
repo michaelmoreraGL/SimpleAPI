@@ -27,7 +27,7 @@ router
     if (isNaN(id)) {
       context.body = `ERROR: Value ${context.params.id} is not a number`;
       context.status = 400;
-    } else if (id % 2 != 0) {
+    } else if (id == 4 || id % 2 != 0) {
       context.body = `ERROR: Number ${id} is not divisible by 2`;
       context.status = 501;
     } else {
