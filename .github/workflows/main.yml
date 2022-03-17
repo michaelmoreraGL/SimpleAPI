@@ -1,0 +1,28 @@
+name: Main
+
+on: [push, pull_request]
+
+jobs:
+  normal_ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Yarn Install and Build
+        run: |
+          yarn
+          yarn build
+          
+      - name: Execute API Client
+        run: yarn start
+
+      - name: execute API tests
+        run: yarn test
+
+  pull_request_ci:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run PR CI Teests
+        run: yarn test
